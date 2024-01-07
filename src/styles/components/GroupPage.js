@@ -21,8 +21,7 @@ const appBarStyle = {
 }
 
 const HomepageHeading3 = styled.h3`
-    margin: 12px;
-    width: 80%;
+    width: 80vw;
 `
 
 export {
