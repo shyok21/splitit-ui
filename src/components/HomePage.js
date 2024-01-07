@@ -6,10 +6,31 @@ import { CenteredDivContainer, Page } from "../styles/components/common";
 import { signInUser } from "../utils/api";
 import { getToken, signIn } from "../utils/firebase";
 import AllExpenseGroups from "./AllExpenseGroups";
+const LoginPage = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <CenteredDivContainer>
+      <Typography variant="h3">SPLIT IT</Typography>
+      <GoogleButton
+        type="dark"
+        onClick={async () => {
+          await signIn();
+          const idToken = await getToken();
+          const user = await signInUser(idToken);
+          if (!user) {
+            alert("Failed to add user");
+          } else {
+            dispatch(userUpdate(user));
+          }
+        }}
+      />
+    </CenteredDivContainer>
+  );
+};
 
 export default function HomePage() {
   const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
 
   return (
     <Page
@@ -18,27 +39,7 @@ export default function HomePage() {
         height: "100vh",
       }}
     >
-      <CenteredDivContainer>
-        <Typography variant="h3">SPLIT IT</Typography>
-
-        {user ? (
-          <AllExpenseGroups />
-        ) : (
-          <GoogleButton
-            type="dark"
-            onClick={async () => {
-              await signIn();
-              const idToken = await getToken();
-              const user = await signInUser(idToken);
-              if (!user) {
-                alert("Failed to add user");
-              } else {
-                dispatch(userUpdate(user));
-              }
-            }}
-          />
-        )}
-      </CenteredDivContainer>
+      {user ? <AllExpenseGroups /> : <LoginPage />}
     </Page>
   );
 }
