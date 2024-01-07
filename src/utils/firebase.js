@@ -30,6 +30,9 @@ export const signIn = async () => {
 };
 
 export const getToken = async () => {
-  const token = await auth?.currentUser?.getIdToken(true);
-  console.log(token);
+  try {
+    return await auth?.currentUser?.getIdToken(false);
+  } catch (e) {
+    return null;
+  }
 };
