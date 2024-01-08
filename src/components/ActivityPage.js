@@ -2,13 +2,13 @@ import React from "react";
 import { HomepageBody } from "../styles/components/GroupPage";
 import CommonAppBar from "../utils/Appbar";
 
-const GroupPage = () => {
+const ActivityPage = () => {
 
     return (
         <HomepageBody>
-            <CommonAppBar section='group' />
+            <CommonAppBar section='activity' />
         </HomepageBody>
     );
 };
 
-export default GroupPage;
+export default ActivityPage;

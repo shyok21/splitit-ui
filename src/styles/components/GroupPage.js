@@ -24,8 +24,10 @@ const HomepageHeading3 = styled.h3`
     width: 80vw;
 `
 
+
+
 export {
     HomepageBody,
     HomepageHeading3,
-    appBarStyle
+    appBarStyle,
 }
