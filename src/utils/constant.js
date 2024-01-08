@@ -6,7 +6,9 @@ const Constant = {
     'greenTextColor': '#98FF98',
     'redTextColor': '#F08080',
     'owedDefaultText': 'Funds coming your way!',
-    'owingDefaultText': 'Cash me outside!'
+    'owingDefaultText': 'Cash me outside!',
+    'selectedOptionBackgroundColor': '#8a3b8f',
+    'selectableOptionBackgroundColor': '#3d1d47'
 }
 
 export { Constant }

@@ -1,9 +1,12 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React from "react";
 import { Provider } from "react-redux";
+import AccountPage from "./components/AccountPage";
+import ActivityPage from "./components/ActivityPage";
+import FriendsPage from "./components/FriendsPage";
+import GroupPage from "./components/GroupPage";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import GroupPage from "./components/GroupPage";
 import HomePage from "./components/HomePage";
 import { persistor, store } from "./redux/store";
 import { darkTheme } from "./utils/theme";
@@ -17,6 +20,9 @@ function App() {
             <Routes>
               <Route exact path="/" element={<HomePage />} />
               <Route path="/group" element={<GroupPage />} />
+              <Route path="/friends" element={<FriendsPage />} />
+              <Route path="/activity" element={<ActivityPage />} />
+              <Route path="/account" element={<AccountPage />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
