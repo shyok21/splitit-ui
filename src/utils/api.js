@@ -54,3 +54,7 @@ export const addExpenseGroup = async ({ name, description }) => {
     return null;
   }
 };
+
+export {
+  getAxiosConfig
+}

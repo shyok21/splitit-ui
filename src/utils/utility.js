@@ -1,0 +1,1 @@
+export const getFormattedCost = (expense) => '₹' + expense.toLocaleString('en-IN');

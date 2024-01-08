@@ -6,9 +6,10 @@ import NavSection from "../components/NavSection";
 import React from "react";
 import { useState } from "react";
 
-const CommonAppBar = ({section}) => {
-    const [showSidebar, setShowSidebar] = useState(false);
+import { getFormattedCost } from "./utility";
 
+const CommonAppBar = ({section, expense}) => {
+    const [showSidebar, setShowSidebar] = useState(false);
     const handleSidebarToggle = () => {
         setShowSidebar(!showSidebar);
     };
@@ -17,9 +18,16 @@ const CommonAppBar = ({section}) => {
         <React.StrictMode>
         <AppBar position="fixed" style={appBarStyle}>
             <Toolbar>
-                <HomepageHeading3>
-                    Collect your <span style={{ color: Constant.greenTextColor }}>₹24,000</span> vibes!
-                </HomepageHeading3>
+                {
+                    expense > 0 ?
+                    <HomepageHeading3>
+                        Collect your <span style={{ color: Constant.greenTextColor }}>{getFormattedCost(expense)}</span> vibes!
+                    </HomepageHeading3>
+                    :
+                    <HomepageHeading3>
+                        Pay <span style={{ color: Constant.redTextColor }}>{getFormattedCost(-expense)}</span> vibes!
+                    </HomepageHeading3>
+                }
                 <GroupIcon
                     style={{ fontSize: "1.8em", width: '20vw', cursor: 'pointer', textAlign: 'center' }}
                     onClick={handleSidebarToggle}

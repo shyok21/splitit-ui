@@ -39,7 +39,7 @@ const ExpenseGroupCard = ({ name, description }) => {
 };
 
 export default function AllExpenseGroups() {
-  const user = useSelector((state) => state.user.value);
+  // const user = useSelector((state) => state.user.value);
   const [expenseGroups, setExpenseGroups] = useState([]);
   const [showAddDialog, setShowAddDialog] = useState(false);
 

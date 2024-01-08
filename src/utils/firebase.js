@@ -31,7 +31,14 @@ export const signIn = async () => {
 
 export const getToken = async () => {
   try {
-    return await auth?.currentUser?.getIdToken(false);
+    let token = null;
+    while (!token) {
+      token = await auth?.currentUser?.getIdToken(false);
+      if (!token) {
+        await new Promise((resolve) => setTimeout(resolve, 20));
+      }
+    }
+    return token;
   } catch (e) {
     return null;
   }

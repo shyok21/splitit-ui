@@ -7,9 +7,10 @@ import GroupPage from "./components/GroupPage";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import HomePage from "./components/HomePage";
 import { persistor, store } from "./redux/store";
 import { darkTheme } from "./utils/theme";
+
+import GroupExpense from "./components/GroupExpense";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <ThemeProvider theme={createTheme(darkTheme)}>
           <BrowserRouter>
             <Routes>
-              <Route exact path="/" element={<HomePage />} />
+              <Route exact path="/" element={<GroupPage />} />
               <Route path="/group" element={<GroupPage />} />
+              <Route path="/group/:id" element={<GroupExpense />} />
               <Route path="/friends" element={<FriendsPage />} />
               <Route path="/activity" element={<ActivityPage />} />
               <Route path="/account" element={<AccountPage />} />
