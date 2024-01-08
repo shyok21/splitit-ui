@@ -6,6 +6,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import BalanceIcon from '@mui/icons-material/Balance';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
+import FaceIcon from '@mui/icons-material/Face';
 import { Add } from '@mui/icons-material';
 
 export const IconFactory = ({ id, style, onClick }) => {
@@ -44,6 +45,10 @@ export const IconFactory = ({ id, style, onClick }) => {
     } else if(id === 'add') {
         return (
             <Add style={style} onClick={onClick} />
+        )
+    } else if(id === 'face') {
+        return (
+            <FaceIcon style={style} onClick={onClick} />
         )
     }
     

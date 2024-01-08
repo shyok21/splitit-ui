@@ -31,7 +31,7 @@ const AddGroupForm = ({ open, handleClose, addToExpenseGroupList, groupId }) => 
 
 
     const [formData, setFormData] = useState({
-      userId: ""
+      user_id: ""
     });
 
     console.log({formData});
@@ -50,7 +50,7 @@ const AddGroupForm = ({ open, handleClose, addToExpenseGroupList, groupId }) => 
 
     const selectOption = ({email, id}) => {
         setTextValue(email);
-        setFormData({userId: id})
+        setFormData({user_id: id})
     }
   
     const handleSubmit = async (e) => {
@@ -145,8 +145,30 @@ const GroupMembers = ({members, groupId}) => {
             flexDirection: 'column',
             justifyContent: 'center'
         }}>
-            <p>Souvik Mondal</p>
-            <p>Soham Mukherjee</p>
+            {
+                groupMembers.map(({user_name}) => 
+                    <div style={{
+                        width: '100%',
+                        height: '15vw',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems:"center"
+                    }}>
+                        <IconFactory id='face' style={{fontSize: '10vw'}} />
+                        <h3 style={{marginLeft: '10px'}}>{user_name}</h3>
+                    </div> 
+                )
+            }
+            {/* <div style={{
+                width: '100%',
+                height: '15vw',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems:"center"
+            }}>
+                <IconFactory id='face' style={{fontSize: '10vw'}} />
+                <h3 style={{marginLeft: '10px'}}>Souvik Mondal</h3>
+            </div> */}
 
             
             <AddGroupForm
