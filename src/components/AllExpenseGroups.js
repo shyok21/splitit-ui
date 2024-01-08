@@ -3,7 +3,7 @@ import { Box, Card, Fab, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getExpenseGroupsForUser } from "../utils/api";
-import AddExpenseGroupForm from "./AddExpenseGroupForm";
+import AddGroupForm from "./AddGroupForm";
 
 const EmptyExpenseGroupMessage = () => {
   return (
@@ -71,7 +71,7 @@ export default function AllExpenseGroups() {
         padding: "20px",
       }}
     >
-      <AddExpenseGroupForm
+      <AddGroupForm
         open={showAddDialog}
         handleClose={() => setShowAddDialog(false)}
         addToExpenseGroupList={addExpenseGroup}

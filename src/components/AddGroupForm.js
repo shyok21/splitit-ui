@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddExpenseGroupForm = ({ open, handleClose, addToExpenseGroupList }) => {
+const AddGroupForm = ({ open, handleClose, addToExpenseGroupList }) => {
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
@@ -102,4 +102,4 @@ const AddExpenseGroupForm = ({ open, handleClose, addToExpenseGroupList }) => {
   );
 };
 
-export default AddExpenseGroupForm;
+export default AddGroupForm;

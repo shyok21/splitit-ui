@@ -1,10 +1,10 @@
 import { HomepageHeading3, appBarStyle } from "../styles/components/GroupPage";
 import { Constant } from "./constant";
-import GroupIcon from '@mui/icons-material/Group';
 import { AppBar, Toolbar, Slide, Box } from "@mui/material";
 import NavSection from "../components/NavSection";
 import React from "react";
 import { useState } from "react";
+import { IconFactory } from "../components/NavSection";
 
 import { getFormattedCost } from "./utility";
 
@@ -28,7 +28,8 @@ const CommonAppBar = ({section, expense}) => {
                         Pay <span style={{ color: Constant.redTextColor }}>{getFormattedCost(-expense)}</span> vibes!
                     </HomepageHeading3>
                 }
-                <GroupIcon
+                <IconFactory
+                    id={section}
                     style={{ fontSize: "1.8em", width: '20vw', cursor: 'pointer', textAlign: 'center' }}
                     onClick={handleSidebarToggle}
                 />

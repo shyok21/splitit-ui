@@ -30,22 +30,22 @@ const sections = [
     { id: 'account', title: 'Account' }
 ]
 
-const IconFactory = ({ id }) => {
+export const IconFactory = ({ id, style, onClick }) => {
     if(id === 'group') {
         return (
-            <GroupIcon style={iconStyle} />
+            <GroupIcon style={style} onClick={onClick} />
         )
     } else if(id === 'friends') {
         return (
-            <PersonIcon style={iconStyle} /> 
+            <PersonIcon style={style} onClick={onClick} /> 
         )
     } else if(id === 'activity') {
         return (
-            <ShowChartIcon style={iconStyle} />
+            <ShowChartIcon style={style} onClick={onClick} />
         )
     } else {
         return (
-            <AccountCircleIcon style={iconStyle} />
+            <AccountCircleIcon style={style} onClick={onClick} />
         )
     }
 }
@@ -61,7 +61,7 @@ const NavSection = (props) => {
                             Constant.selectedOptionBackgroundColor : 
                             Constant.selectableOptionBackgroundColor }`
                     }} >
-                        <IconFactory id={id} />
+                        <IconFactory id={id} style={iconStyle} />
                         <h3>{ title }</h3>
                     </a>
                 )

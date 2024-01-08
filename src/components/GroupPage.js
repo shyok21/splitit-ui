@@ -6,7 +6,7 @@ import { Constant } from "../utils/constant";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useSelector } from "react-redux";
 import { LoginPage } from "./LoginPage";
-import AddExpenseGroupForm from "./AddExpenseGroupForm";
+import AddGroupForm from "./AddGroupForm";
 import { Fab } from "@mui/material";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
@@ -74,7 +74,7 @@ const GroupPage = () => {
                     groups && groups.map(group => <Group name={group.name} id={group.id} />)
                 }
                 </div>
-                <AddExpenseGroupForm
+                <AddGroupForm
                     open={showAddDialog}
                     handleClose={() => setShowAddDialog(false)}
                     addToExpenseGroupList={addExpenseGroup}

@@ -6,7 +6,7 @@ const FriendsPage = () => {
 
     return (
         <HomepageBody>
-            <CommonAppBar section='friends' />
+            <CommonAppBar section='friends' expense={24000} />
         </HomepageBody>
     );
 };
