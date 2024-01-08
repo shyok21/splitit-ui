@@ -5,26 +5,49 @@ const api = axios.create({
   baseURL: "http://localhost:8000/api",
 });
 
-api.interceptors.request.use(
-  async (config) => {
-    const token = await getToken();
+const getAxiosConfig = async () => {
+  const token = await getToken();
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
 
 export const signInUser = async (idToken) => {
   try {
     const { data } = await api.post("auth/", {
       idToken,
     });
+
+    return data;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const getExpenseGroupsForUser = async () => {
+  try {
+    const config = await getAxiosConfig();
+    const { data } = await api.get("expense_groups/", config);
+    return data;
+  } catch (e) {
+    return [];
+  }
+};
+
+export const addExpenseGroup = async ({ name, description }) => {
+  try {
+    const config = await getAxiosConfig();
+    const { data } = await api.post(
+      "expense_groups/",
+      {
+        name,
+        description,
+      },
+      config
+    );
 
     return data;
   } catch (e) {

@@ -10,7 +10,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   return (
-    <CenteredDivContainer>
+    <>
       <Typography variant="h3">SPLIT IT</Typography>
       <GoogleButton
         type="dark"
@@ -25,7 +25,7 @@ const LoginPage = () => {
           }
         }}
       />
-    </CenteredDivContainer>
+    </>
   );
 };
 
@@ -39,7 +39,9 @@ export default function HomePage() {
         height: "100vh",
       }}
     >
-      {user ? <AllExpenseGroups /> : <LoginPage />}
+      <CenteredDivContainer>
+        {user ? <AllExpenseGroups /> : <LoginPage />}
+      </CenteredDivContainer>
     </Page>
   );
 }
