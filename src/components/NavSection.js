@@ -1,8 +1,5 @@
 import { Section } from "../styles/components/Section"
-import GroupIcon from '@mui/icons-material/Group';
-import PersonIcon from '@mui/icons-material/Person';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { IconFactory } from "./IconFactory";
 import { Constant } from "../utils/constant";
 
 const iconStyle = { 
@@ -29,26 +26,6 @@ const sections = [
     { id: 'activity', title: 'Activity' },
     { id: 'account', title: 'Account' }
 ]
-
-export const IconFactory = ({ id, style, onClick }) => {
-    if(id === 'group') {
-        return (
-            <GroupIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'friends') {
-        return (
-            <PersonIcon style={style} onClick={onClick} /> 
-        )
-    } else if(id === 'activity') {
-        return (
-            <ShowChartIcon style={style} onClick={onClick} />
-        )
-    } else {
-        return (
-            <AccountCircleIcon style={style} onClick={onClick} />
-        )
-    }
-}
 
 const NavSection = (props) => {
     return (

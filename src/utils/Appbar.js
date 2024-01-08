@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Slide, Box } from "@mui/material";
 import NavSection from "../components/NavSection";
 import React from "react";
 import { useState } from "react";
-import { IconFactory } from "../components/NavSection";
+import { IconFactory } from "../components/IconFactory";
 
 import { getFormattedCost } from "./utility";
 

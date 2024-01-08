@@ -1,7 +1,6 @@
 import { Add } from "@mui/icons-material";
 import { Box, Card, Fab, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { getExpenseGroupsForUser } from "../utils/api";
 import AddGroupForm from "./AddGroupForm";
 
