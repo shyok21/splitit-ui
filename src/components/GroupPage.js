@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { HomepageBody } from "../styles/components/GroupPage";
+import { HomepageBody, groupPageStyle, groupStyle } from "../styles/components/GroupPage";
 import CommonAppBar from "../utils/Appbar";
 import { getExpenseGroupsForUser } from "../utils/api";
-import { Constant } from "../utils/constant";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useSelector } from "react-redux";
 import { LoginPage } from "./LoginPage";
@@ -12,23 +11,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 const Group = (props) => {
     return (
-        <a 
-            style={{
-                width: '45vw',
-                margin: '2%',
-                height: '60vw',
-                background: Constant.lightBackgroundColor,
-                border: `solid ${Constant.lightBackgroundColor} 1px`,
-                borderRadius: '20px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent:"center",
-                alignItems: 'center',
-                color: Constant.defaultTextColor,
-                textDecoration: 'none'
-            }}
-            href={`/group/${props.id}`}
-        >
+        <a style={groupStyle} href={`/group/${props.id}`}>
             <FormatListBulletedIcon style={{fontSize: '40vw', textAlign: 'center'}} />
             <p>{props.name}</p>
         </a>
@@ -63,13 +46,7 @@ const GroupPage = () => {
                 {
                     !groups && <h1>Loading</h1>
                 }
-                <div style={{
-                    width: '100vw',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    marginTop: '5%'
-                }}>
+                <div style={groupPageStyle}>
                 {
                     groups && groups.map(group => <Group name={group.name} id={group.id} />)
                 }
@@ -78,11 +55,7 @@ const GroupPage = () => {
                     open={showAddDialog}
                     handleClose={() => setShowAddDialog(false)}
                     addToExpenseGroupList={addExpenseGroup}
-                    style={{
-                        width: '100px',
-                        height: '100px',
-                        background: 'red'
-                    }}
+                    style={{ width: '100px', height: '100px' }}
                 />
                 <Fab
                     size="large"

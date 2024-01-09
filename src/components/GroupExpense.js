@@ -7,7 +7,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Tabs, Fab, Dialog, DialogTitle, DialogContent, Grid, TextField, Button, CircularProgress } from '@mui/material';
 import { Tab } from '@mui/material';
 import { IconFactory } from './IconFactory';
-import { Constant } from '../utils/constant';
+import { groupExpenseStyle, groupMembersSectionStyle, groupMembersStyle, navIconStyle, userOptionStyle } from '../styles/components/GroupExchange';
 
 const tabSections = [
 	{ id: 'settle-up', title: 'Settle Up' },
@@ -53,12 +53,11 @@ const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) =>
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		const expenseGroup = await addMemberToGroup(formData, groupId);
-		console.log(expenseGroup)
-		addToExpenseGroupList(expenseGroup);
+		await addMemberToGroup(formData, groupId);
+
+		// addToExpenseGroupList(expenseGroup);
 		setFormData({
-			name: "",
-			description: "",
+			user_id: ""
 		});
 		setLoading(false);
 		handleClose();
@@ -93,15 +92,7 @@ const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) =>
 							variant="outlined"
 						/>
 						{
-							options.slice(0, 5).map(({ email, name, id }) => <div style={{
-								width: '80%',
-								height: '50px',
-								border: 'solid black 1px',
-								background: Constant.darkBackgroundColor,
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-							}}
+							options.slice(0, 5).map(({ email, name, id }) => <div style={userOptionStyle}
 								onClick={() => selectOption({ email, id })}
 							>
 								<div>{name}</div>
@@ -113,9 +104,7 @@ const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) =>
 							variant="contained"
 							color="primary"
 							disabled={loading}
-							style={{
-								margin: '10px'
-							}}
+							style={{ margin: '10px' }}
 						>
 							Submit
 							{loading && (
@@ -148,21 +137,10 @@ const GroupMembers = ({ members, groupId }) => {
 	};
 
 	return (
-		<div style={{
-			width: '100%',
-			display: 'flex',
-			flexDirection: 'column',
-			justifyContent: 'center'
-		}}>
+		<div style={groupMembersSectionStyle}>
 			{
 				groupMembers.map(({ user_name }) =>
-					<div style={{
-						width: '100%',
-						height: '15vw',
-						display: 'flex',
-						flexDirection: 'row',
-						alignItems: "center"
-					}}>
+					<div style={groupMembersStyle}>
 						<IconFactory id='face' style={{ fontSize: '10vw' }} />
 						<h3 style={{ marginLeft: '10px' }}>{user_name}</h3>
 					</div>
@@ -212,27 +190,14 @@ const GroupExpense = () => {
 		getGroupById(id)
 			.then(data => setGroupDetails(data))
 			.catch(error => console.log('Error in fetching data', error));
-	}, []);
+	}, [id]);
 
 	if (groupDetails)
 		return (
 			<HomepageBody>
 				<CommonAppBar section='group' expense={-1000} />
-				<div style={{
-					width: '100%',
-					height: '12vw',
-					display: 'flex',
-					flexDirection: 'row',
-					alignItems: 'center',
-					marginTop: '28px'
-				}}>
-					<FormatListBulletedIcon style={{
-						fontSize: '10vw',
-						border: 'solid white 1px',
-						borderRadius: '50%',
-						padding: '2vw',
-						margin: '10px'
-					}} />
+				<div style={groupExpenseStyle}>
+					<FormatListBulletedIcon style={navIconStyle} />
 					<h1>{groupDetails?.name}</h1>
 
 				</div>
