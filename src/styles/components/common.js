@@ -46,8 +46,8 @@ const ShowDate = (props) => {
           alignItems: 'center',
           justifyContent: 'center'
       }}>
-          <div style={{height: '25%', fontSize: '5vw'}}>{date.toLocaleString('default', { month: 'short' })}</div>
-          <div style={{height: '75%', fontSize: '9vw', fontWeight: 'bold'}}>{date.toLocaleString('en-US', { day: '2-digit' })}</div>
+          <div style={{height: '25%', fontSize: '4vw'}}>{date.toLocaleString('default', { month: 'short' })}</div>
+          <div style={{height: '75%', fontSize: '6vw', fontWeight: 'bold'}}>{date.toLocaleString('en-US', { day: '2-digit' })}</div>
       </div>
   )
 }

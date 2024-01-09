@@ -188,11 +188,11 @@ const ShowLentStatus = ({ width, height, settle, user }) => {
         }}>
             <div style={{
                 height: '50%', 
-                fontSize: '5vw'
+                fontSize: '2vw'
             }}>
                 {moneyLentStatus}
             </div>
-            <div style={{height: '50%', fontSize: '5vw', fontWeight: 'bold'}}>
+            <div style={{height: '50%', fontSize: '4vw', fontWeight: 'bold'}}>
             {
                 getFormattedCost(settleMoney)
             }
@@ -224,7 +224,7 @@ const GroupSettlement = ({ members, groupId }) => {
                     flexDirection: 'row',
                     alignItems: 'center'
                 }}>
-                    <ShowDate date={settle.date} width='14vw' height='14vw' />
+                    <ShowDate date={settle.date} width='12vw' height='14vw' />
                     <div style={{
                         width: '60vw',
                         height: '14vw',
@@ -233,8 +233,8 @@ const GroupSettlement = ({ members, groupId }) => {
                         justifyContent: 'center',
                         marginLeft: '2vw'
                     }}>
-                        <div style={{height: '60%', fontSize: '7vw', fontWeight: 'bold'}}>{settle.name}</div>
-                        <div style={{height: '40%', fontSize: '5vw', color: 'grey'}}>{
+                        <div style={{height: '60%', fontSize: '6vw', fontWeight: 'bold'}}>{settle.name}</div>
+                        <div style={{height: '40%', fontSize: '4vw', color: 'grey'}}>{
                             settle.spenders[0].owner === user.id
                                 ? `You paid ${getFormattedCost(settle.spenders[0].amount)}`
                                 : `Someone paid ${getFormattedCost(settle.spenders[0].amount)}`
