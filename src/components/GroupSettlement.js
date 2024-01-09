@@ -170,7 +170,7 @@ const GroupSettlement = ({ members, groupId }) => {
         getExpensesByGroupId(groupId)
             .then((data) => setSettles(data))
             .catch((error) => console.log(error));
-    }, [])
+    }, [groupId])
 
     console.log(settles)
 
