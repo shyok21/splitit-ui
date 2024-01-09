@@ -2,12 +2,13 @@ import axios from "axios";
 import { getToken } from "./firebase";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 const getAxiosConfig = async () => {
   const token = await getToken();
   console.log(token)
+  console.log(process.env.REACT_APP_API_URL)
 
   return {
     headers: {
@@ -99,6 +100,34 @@ export const addExpenses = async (reqBody) => {
       reqBody,
       config
     );
+
+    return data;
+  } catch(e) {
+    return null;
+  }
+}
+
+export const getExpensesByGroupId = async (id) => {
+  try {
+    const config = await getAxiosConfig();
+    const { data } = await api.get(
+      `expense_groups/${id}/expenses/`,
+      config
+    )
+
+    return data;
+  } catch(e) {
+    return null;
+  }
+}
+
+export const getBalancesByGroupId = async (id) => {
+  try {
+    const config = await getAxiosConfig();
+    const { data } = await api.get(
+      `expense_groups/${id}/balances/`,
+      config
+    )
 
     return data;
   } catch(e) {

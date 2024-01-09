@@ -36,4 +36,21 @@ const CenteredDivContainer = (props) => {
   );
 };
 
-export { CenteredDivContainer, Page };
+const ShowDate = (props) => {
+  const date = new Date(props.date);
+  return (
+      <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: props.width,
+          height: props.height,
+          alignItems: 'center',
+          justifyContent: 'center'
+      }}>
+          <div style={{height: '25%', fontSize: '5vw'}}>{date.toLocaleString('default', { month: 'short' })}</div>
+          <div style={{height: '75%', fontSize: '9vw', fontWeight: 'bold'}}>{date.toLocaleString('en-US', { day: '2-digit' })}</div>
+      </div>
+  )
+}
+
+export { CenteredDivContainer, Page, ShowDate };

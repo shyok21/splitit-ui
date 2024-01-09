@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { addExpenses } from '../utils/api';
+import { useEffect, useState } from 'react';
+import { addExpenses, getExpensesByGroupId } from '../utils/api';
 import { Fab, Dialog, DialogTitle, DialogContent, Grid, TextField, Button, CircularProgress, Checkbox } from '@mui/material';
 import { IconFactory } from './IconFactory';
 import { groupMembersSectionStyle } from '../styles/components/GroupExchange';
 import { Select, MenuItem, InputLabel } from '@mui/material';
+import { ShowDate } from '../styles/components/common';
 
 const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
 
@@ -23,7 +24,6 @@ const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
 	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e) => {
-        console.log("Submit");
 		e.preventDefault();
 		setLoading(true);
 
@@ -163,12 +163,31 @@ const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
 };
 
 const GroupSettlement = ({ members, groupId }) => {
-	// const [settles, setSettles] = useState([]);
+	const [settles, setSettles] = useState([]);
 	const [showAddDialog, setShowAddDialog] = useState(false);
+
+    useEffect(() => {
+        getExpensesByGroupId(groupId)
+            .then((data) => setSettles(data))
+            .catch((error) => console.log(error));
+    }, [])
+
+    console.log(settles)
 
 	return (
 		<div style={groupMembersSectionStyle}>
 
+            {
+                settles.map(settle => <div style={{
+                    width: '100vw',
+                    height: '16vw',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center'
+                }}>
+                    <ShowDate date={settle.date} width='14vw' height='14vw' />
+                </div>)
+            }
 
 			<AddSettlementForm
 				open={showAddDialog}
