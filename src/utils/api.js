@@ -1,6 +1,5 @@
 import axios from "axios";
 import { getToken } from "./firebase";
-import { DataArraySharp } from "@mui/icons-material";
 
 const api = axios.create({
   baseURL: "http://localhost:8000/api",
@@ -91,6 +90,21 @@ export const addExpenseGroup = async ({ name, description }) => {
     return null;
   }
 };
+
+export const addExpenses = async (reqBody) => {
+  try {
+    const config = await getAxiosConfig();
+    const { data } = await api.post(
+      "expenses/",
+      reqBody,
+      config
+    );
+
+    return data;
+  } catch(e) {
+    return null;
+  }
+}
 
 export {
   getAxiosConfig

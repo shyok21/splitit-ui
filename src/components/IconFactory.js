@@ -7,52 +7,23 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import BalanceIcon from '@mui/icons-material/Balance';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 import FaceIcon from '@mui/icons-material/Face';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import { Add } from '@mui/icons-material';
 
 export const IconFactory = ({ id, style, onClick }) => {
-    if(id === 'group') {
-        return (
-            <GroupIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'friends') {
-        return (
-            <PersonIcon style={style} onClick={onClick} /> 
-        )
-    } else if(id === 'activity') {
-        return (
-            <ShowChartIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'account') {
-        return (
-            <AccountCircleIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'members') {
-        return (
-            <GroupsIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'settle-up') {
-        return (
-            <HandshakeIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'balance') {
-        return (
-            <BalanceIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'total') {
-        return (
-            <IntegrationInstructionsIcon style={style} onClick={onClick} />
-        )
-    } else if(id === 'add') {
-        return (
-            <Add style={style} onClick={onClick} />
-        )
-    } else if(id === 'face') {
-        return (
-            <FaceIcon style={style} onClick={onClick} />
-        )
-    }
-    
-    else {
-        return (<div></div>)
-    }
+    const iconById = {
+        'group': <GroupIcon style={style} onClick={onClick} />,
+        'friends': <PersonIcon style={style} onClick={onClick} />,
+        'activity': <ShowChartIcon style={style} onClick={onClick} />,
+        'account': <AccountCircleIcon style={style} onClick={onClick} />,
+        'members': <GroupsIcon style={style} onClick={onClick} />,
+        'settle-up': <HandshakeIcon style={style} onClick={onClick} />,
+        'balance': <BalanceIcon style={style} onClick={onClick} />,
+        'total': <IntegrationInstructionsIcon style={style} onClick={onClick} />,
+        'add': <Add style={style} onClick={onClick} />,
+        'face': <FaceIcon style={style} onClick={onClick} />,
+        'receipt': <ReceiptIcon style={style} onClick={onClick} />,
+      };
+      
+      return iconById[id] || <div></div>;
 }
