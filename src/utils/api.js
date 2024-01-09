@@ -7,8 +7,6 @@ const api = axios.create({
 
 const getAxiosConfig = async () => {
   const token = await getToken();
-  console.log(token)
-  console.log(process.env.REACT_APP_API_URL)
 
   return {
     headers: {

@@ -56,7 +56,6 @@ export default function AllExpenseGroups() {
     async function loadExpenseGroups() {
       const result = await getExpenseGroupsForUser();
       setExpenseGroups(result);
-      console.log("Result", result);
     }
 
     const timer = setInterval(loadExpenseGroups, 5000);
@@ -97,7 +96,6 @@ export default function AllExpenseGroups() {
           right: "10px",
         }}
         onClick={() => {
-          console.log("Here");
           setShowAddDialog(true);
         }}
       >

@@ -3,7 +3,6 @@ import { useTheme } from "@mui/material/styles";
 
 const Page = (props) => {
   const theme = useTheme();
-  console.log(theme);
   return (
     <Box
       sx={{

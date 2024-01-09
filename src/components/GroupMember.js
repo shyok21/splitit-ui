@@ -115,8 +115,6 @@ const GroupMembers = ({ members, groupId }) => {
 	const [groupMembers, setGroupMembers] = useState(members);
 	const [showAddDialog, setShowAddDialog] = useState(false);
 
-    console.log(groupMembers)
-
 	const addGroupMembers = (newExpenseGroup) => {
 		setGroupMembers((prevState) => {
 			if (prevState.length) {

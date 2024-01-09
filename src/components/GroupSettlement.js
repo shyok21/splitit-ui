@@ -5,6 +5,9 @@ import { IconFactory } from './IconFactory';
 import { groupMembersSectionStyle } from '../styles/components/GroupExchange';
 import { Select, MenuItem, InputLabel } from '@mui/material';
 import { ShowDate } from '../styles/components/common';
+import { useSelector } from 'react-redux';
+import { getFormattedCost } from '../utils/utility';
+import { Constant } from '../utils/constant';
 
 const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
 
@@ -162,17 +165,53 @@ const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
 	);
 };
 
+const getSettledMoney = (borrowers, isMoneyLent, userId) => {
+    if(isMoneyLent) {
+        return borrowers.filter(({owner}) => owner !== userId).reduce((a, b) => a + (+b.amount), 0);
+    }
+    return +borrowers.filter(({owner}) => owner === userId)[0]?.amount
+}
+
+const ShowLentStatus = ({ width, height, settle, user }) => {
+    const isMoneyLent = user.id === settle.spenders[0].owner
+    const moneyLentStatus = isMoneyLent ? 'You lent' : 'You borrowed';
+    const settleMoney = getSettledMoney(settle.borrowers, isMoneyLent, user.id)
+
+    return (
+        <div style={{
+            width,
+            height,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            color: isMoneyLent ? Constant.greenTextColor : Constant.redTextColor
+        }}>
+            <div style={{
+                height: '50%', 
+                fontSize: '5vw'
+            }}>
+                {moneyLentStatus}
+            </div>
+            <div style={{height: '50%', fontSize: '5vw', fontWeight: 'bold'}}>
+            {
+                getFormattedCost(settleMoney)
+            }
+            </div>
+        </div>
+    )
+}
+
 const GroupSettlement = ({ members, groupId }) => {
 	const [settles, setSettles] = useState([]);
 	const [showAddDialog, setShowAddDialog] = useState(false);
+
+    const user = useSelector(state => state.user.value);
 
     useEffect(() => {
         getExpensesByGroupId(groupId)
             .then((data) => setSettles(data))
             .catch((error) => console.log(error));
     }, [groupId])
-
-    console.log(settles)
 
 	return (
 		<div style={groupMembersSectionStyle}>
@@ -186,6 +225,23 @@ const GroupSettlement = ({ members, groupId }) => {
                     alignItems: 'center'
                 }}>
                     <ShowDate date={settle.date} width='14vw' height='14vw' />
+                    <div style={{
+                        width: '60vw',
+                        height: '14vw',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        marginLeft: '2vw'
+                    }}>
+                        <div style={{height: '60%', fontSize: '7vw', fontWeight: 'bold'}}>{settle.name}</div>
+                        <div style={{height: '40%', fontSize: '5vw', color: 'grey'}}>{
+                            settle.spenders[0].owner === user.id
+                                ? `You paid ${getFormattedCost(settle.spenders[0].amount)}`
+                                : `Someone paid ${getFormattedCost(settle.spenders[0].amount)}`
+                        }
+                        </div>
+                    </div>
+                    <ShowLentStatus width='25vw' height='14vw' settle={settle} user={user} />
                 </div>)
             }
 
