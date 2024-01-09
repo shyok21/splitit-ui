@@ -188,7 +188,7 @@ const ShowLentStatus = ({ width, height, settle, user }) => {
         }}>
             <div style={{
                 height: '50%', 
-                fontSize: '2vw'
+                fontSize: '3vw'
             }}>
                 {moneyLentStatus}
             </div>
@@ -222,7 +222,8 @@ const GroupSettlement = ({ members, groupId }) => {
                     height: '16vw',
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
                     <ShowDate date={settle.date} width='12vw' height='14vw' />
                     <div style={{
