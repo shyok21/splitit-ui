@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { getFormattedCost } from '../utils/utility';
 import { Constant } from '../utils/constant';
 
-const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
+const AddSettlementForm = ({ open, handleClose, groupId, members, addToSettle }) => {
 
 	const [name, setName] = useState("");
     const [ description, setDescription ] = useState("");
@@ -52,7 +52,15 @@ const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
         }
 
         await addExpenses(formData);
+        addToSettle(formData);
 		setLoading(false);
+
+        setName("");
+        setDescription("");
+        setTotalExpense(0);
+        setSpenderOption(members[0]);
+        setBorrowersStatus(Object.fromEntries(members.map(({ user_id }) => [user_id, true])));
+        
 		handleClose();
 	};
 
@@ -97,6 +105,7 @@ const AddSettlementForm = ({ open, handleClose, groupId, members }) => {
 
                         <TextField
 							required
+                            type="number"
 							label="Expense"
 							name="expense"
 							value={totalExpense}
@@ -202,8 +211,23 @@ const ShowLentStatus = ({ width, height, settle, user }) => {
 }
 
 const GroupSettlement = ({ members, groupId }) => {
-	const [settles, setSettles] = useState([]);
+	const [settles, setSettles] = useState(null);
 	const [showAddDialog, setShowAddDialog] = useState(false);
+
+    const addSettles = (data) => {
+        const newEntry = {
+            group: data.group,
+            name: data.name,
+            description: data.description,
+            date: Date.now(),
+            owner_name: data.owner,
+            type: data.type,
+            spenders: data.spenders,
+            borrowers: data.borrowers
+        }
+
+        setSettles((prevSettles) => [...prevSettles, newEntry]);
+    }
 
     const user = useSelector(state => state.user.value);
 
@@ -217,7 +241,7 @@ const GroupSettlement = ({ members, groupId }) => {
 		<div style={groupMembersSectionStyle}>
 
             {
-                settles.map(settle => <div style={{
+                settles && settles.map((settle, index) => <div key={index} style={{
                     width: '100vw',
                     height: '16vw',
                     display: 'flex',
@@ -245,12 +269,18 @@ const GroupSettlement = ({ members, groupId }) => {
                     <ShowLentStatus width='25vw' height='14vw' settle={settle} user={user} />
                 </div>)
             }
+            {
+                !settles && <CircularProgress />
+            }
+            {
+                settles && settles.length === 0 && <h3>Group Is Settled</h3>
+            }
 
 			<AddSettlementForm
 				open={showAddDialog}
                 members={members}
 				handleClose={() => setShowAddDialog(false)}
-				// addToExpenseGroupList={addGroupMembers}
+				addToSettle={addSettles}
 				groupId={groupId}
 			/>
 

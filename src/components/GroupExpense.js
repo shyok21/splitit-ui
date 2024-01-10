@@ -7,6 +7,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Tabs, Tab } from '@mui/material';
 import { IconFactory } from './IconFactory';
 import { groupExpenseStyle, navIconStyle } from '../styles/components/GroupExchange';
+import { CircularProgress } from '@mui/material';
 
 import GroupSectionFactory from './GroupSectionFactory';
 
@@ -52,14 +53,14 @@ const GroupExpense = () => {
 					aria-label="full width tabs example"
 				>
 					{
-						tabSections.map(({ id }) => <Tab label={<IconFactory id={id} style={{ fontSize: '2.5em' }} />} />)
+						tabSections.map(({ id }) => <Tab label={<IconFactory key={id} id={id} style={{ fontSize: '2.5em' }} />} />)
 					}
 				</Tabs>
 				<GroupSectionFactory id={selectedTabIndex} members={groupDetails?.members} groupId={id} />
 			</HomepageBody>
 		)
 	else
-		return (<h1>Loading</h1>)
+		return (<CircularProgress />)
 }
 
 export default GroupExpense;

@@ -8,6 +8,7 @@ import { groupMembersSectionStyle, groupMembersStyle, userOptionStyle } from '..
 const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) => {
 	const [users, setUsers] = useState([]);
 	const [options, setOptions] = useState([]);
+	const [newUserName, setNewUserName] = useState("");
 
 	const [textValue, setTextValue] = useState("");
 
@@ -34,9 +35,10 @@ const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) =>
 		}
 	};
 
-	const selectOption = ({ email, id }) => {
+	const selectOption = ({ email, id, name }) => {
 		setTextValue(email);
-		setFormData({ user_id: id })
+		setFormData({ user_id: id });
+		setNewUserName(name);
 	}
 
 	const handleSubmit = async (e) => {
@@ -44,7 +46,12 @@ const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) =>
 		setLoading(true);
 		await addMemberToGroup(formData, groupId);
 
-		// addToExpenseGroupList(expenseGroup);
+		addToExpenseGroupList({
+			user_id: formData.user_id,
+			user_name: newUserName,
+			user_email: textValue
+
+		});
 		setFormData({
 			user_id: ""
 		});
@@ -82,7 +89,7 @@ const AddMemberForm = ({ open, handleClose, addToExpenseGroupList, groupId }) =>
 						/>
 						{
 							options.slice(0, 5).map(({ email, name, id }) => <div style={userOptionStyle}
-								onClick={() => selectOption({ email, id })}
+								onClick={() => selectOption({ email, id, name })}
 							>
 								<div>{name}</div>
 								<div>{email}</div>

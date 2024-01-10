@@ -8,6 +8,7 @@ import { LoginPage } from "./LoginPage";
 import AddGroupForm from "./AddGroupForm";
 import { Fab } from "@mui/material";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { CircularProgress } from "@mui/material";
 
 const Group = (props) => {
     return (
@@ -44,7 +45,7 @@ const GroupPage = () => {
             <HomepageBody>
                 <CommonAppBar section='group' expense={24000} />
                 {
-                    !groups && <h1>Loading</h1>
+                    !groups && <CircularProgress />
                 }
                 <div style={groupPageStyle}>
                 {
