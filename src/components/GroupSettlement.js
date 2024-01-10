@@ -108,7 +108,7 @@ const AddSettlementForm = ({ open, handleClose, groupId, members, addToSettle })
                             type="number"
 							label="Expense"
 							name="expense"
-							value={totalExpense}
+							value={totalExpense || ''}
 							onChange={(e) => setTotalExpense(+e.target.value)}
 							variant="outlined"
                             sx={{ margin: '10px' }}
