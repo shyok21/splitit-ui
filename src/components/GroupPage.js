@@ -11,10 +11,7 @@ import CommonAppBar from "../utils/Appbar";
 import { getExpenseGroupsForUser } from "../utils/api";
 import { EXPENSE_GROUP_TYPES } from "../utils/common";
 import AddGroupForm from "./AddGroupForm";
-<<<<<<< HEAD
-=======
 import { LoginPage } from "./LoginPage";
->>>>>>> 2f73dea (Added type support)
 
 const Group = (props) => {
   let type = props.type;
