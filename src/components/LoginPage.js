@@ -1,14 +1,17 @@
-import { useDispatch } from "react-redux";
 import { Typography } from "@mui/material";
 import GoogleButton from "react-google-button";
+import { useDispatch } from "react-redux";
 import { userUpdate } from "../redux/users";
+import { HomepageBody } from "../styles/components/GroupPage";
+import { CenteredDivContainer } from "../styles/components/common";
 import { signInUser } from "../utils/api";
 import { getToken, signIn } from "../utils/firebase";
 export const LoginPage = () => {
-    const dispatch = useDispatch();
-  
-    return (
-      <>
+  const dispatch = useDispatch();
+
+  return (
+    <HomepageBody>
+      <CenteredDivContainer>
         <Typography variant="h3">SPLIT IT</Typography>
         <GoogleButton
           type="dark"
@@ -23,6 +26,7 @@ export const LoginPage = () => {
             }
           }}
         />
-      </>
-    );
+      </CenteredDivContainer>
+    </HomepageBody>
+  );
 };

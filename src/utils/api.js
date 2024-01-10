@@ -40,22 +40,22 @@ export const getExpenseGroupsForUser = async () => {
 export const getGroupById = async (id) => {
   try {
     const config = await getAxiosConfig();
-     const { data } = await api.get(`expense_groups/${id}`, config);
-     return data;
-  } catch(e) {
+    const { data } = await api.get(`expense_groups/${id}`, config);
+    return data;
+  } catch (e) {
     return null;
   }
-}
+};
 
 export const getAllUsers = async () => {
   try {
     const config = await getAxiosConfig();
-    const { data } = await api.get('users', config);
+    const { data } = await api.get("users", config);
     return data;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
-}
+};
 
 export const addMemberToGroup = async (reqBody, groupId) => {
   try {
@@ -67,12 +67,15 @@ export const addMemberToGroup = async (reqBody, groupId) => {
     );
 
     return data;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
-}
+};
 
-export const addExpenseGroup = async ({ name, description }) => {
+export const addExpenseGroup = async ({ name, description, type }) => {
+  if (!type || type.length === 0) {
+    type = "other";
+  }
   try {
     const config = await getAxiosConfig();
     const { data } = await api.post(
@@ -80,6 +83,7 @@ export const addExpenseGroup = async ({ name, description }) => {
       {
         name,
         description,
+        type,
       },
       config
     );
@@ -93,46 +97,34 @@ export const addExpenseGroup = async ({ name, description }) => {
 export const addExpenses = async (reqBody) => {
   try {
     const config = await getAxiosConfig();
-    const { data } = await api.post(
-      "expenses/",
-      reqBody,
-      config
-    );
+    const { data } = await api.post("expenses/", reqBody, config);
 
     return data;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
-}
+};
 
 export const getExpensesByGroupId = async (id) => {
   try {
     const config = await getAxiosConfig();
-    const { data } = await api.get(
-      `expense_groups/${id}/expenses/`,
-      config
-    )
+    const { data } = await api.get(`expense_groups/${id}/expenses/`, config);
 
     return data;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
-}
+};
 
 export const getBalancesByGroupId = async (id) => {
   try {
     const config = await getAxiosConfig();
-    const { data } = await api.get(
-      `expense_groups/${id}/balances/`,
-      config
-    )
+    const { data } = await api.get(`expense_groups/${id}/balances/`, config);
 
     return data;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
-}
+};
 
-export {
-  getAxiosConfig
-}
+export { getAxiosConfig };
